@@ -22,6 +22,18 @@ const workoutSchema = new Schema({
     weight: {
         type: Number,
     },
-    sets: {},
-    reps: {},
+    sets: {
+        type: Number,
+    },
+    reps: {
+        type: Number,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
 });
+
+const workout = mongoose.model("workout", workoutSchema);
+
+module.exports = workout;
