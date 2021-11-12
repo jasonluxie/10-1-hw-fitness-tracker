@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public")); //serving public files
 
-app.use(morgan("devlog")); //to display morgan logs
+app.use(morgan("dev")); //to display morgan logs
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
     useNewUrlParser: true,

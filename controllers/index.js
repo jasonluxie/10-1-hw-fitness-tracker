@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const api = require("./apis");
+const apiRoute = require("./apis");
 const path = require("path"); //not sure if i need this
+
+router.use("/api", apiRoute);
 
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -15,6 +17,6 @@ router.get("/exercise", (req, res) => {
 });
 
 router.get("exercise?:id", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/exercise.html"))
-} )
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+});
 module.exports = router;
