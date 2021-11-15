@@ -23,7 +23,6 @@ router.post(`/workouts`, ({ body }, res) => {
 });
 
 router.put(`/workouts/:id`, (req, res) => {
-    console.log(req.body);
     Workout.findOneAndUpdate(
         { _id: req.params.id },
         { $push: { exercises: req.body } }
@@ -36,9 +35,28 @@ router.put(`/workouts/:id`, (req, res) => {
         });
 });
 
-router.get(`/workouts/range`),
-    (req, res) => {
-        Workout.find({});
-    };
+router.get(`/workouts/range`, (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalWeight: { $sum: "$exercises.weight" },
+                totalDuration: { $sum: "$exercises.duration" },
+            },
+        },
+    ])
+        .then((workout) => {
+            const sevenRecent = [];
+            i = 0;
+            while (i < 7) {
+                let workoutDay = workout.pop();
+                sevenRecent.push(workoutDay);
+                i++;
+            }
+            res.json(sevenRecent);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
 
 module.exports = router;
