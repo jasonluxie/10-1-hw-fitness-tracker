@@ -14,3 +14,4 @@ The application is deployed [here](https://hw-10-1-workout-tracker.herokuapp.com
 -   [mongoose](https://www.npmjs.com/package/mongoose)
 
 ## Demonstration
+![Gif showing user adding exercise and displaying graphs](./assets/fitness-tracker.gif)
