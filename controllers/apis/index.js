@@ -12,7 +12,6 @@ router.get(`/workouts`, (req, res) => {
 });
 
 router.post(`/workouts`, ({ body }, res) => {
-    //route testing with insomnia, data is actually send as full body in front end
     Workout.create(body)
         .then((workoutTransaction) => {
             res.json(workoutTransaction);
