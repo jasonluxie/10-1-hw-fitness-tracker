@@ -11,10 +11,9 @@ router.get(`/workouts`, (req, res) => {
         });
 });
 
-router.post(`/workouts`, (req /*{data}*/, res) => {
-    console.log(req.body)
-    const data = req.body //route testing with insomnia, data is actually send as full body in front end
-    Workout.create(data)
+router.post(`/workouts`, ({ body }, res) => {
+    //route testing with insomnia, data is actually send as full body in front end
+    Workout.create(body)
         .then((workoutTransaction) => {
             res.json(workoutTransaction);
         })
@@ -23,8 +22,23 @@ router.post(`/workouts`, (req /*{data}*/, res) => {
         });
 });
 
-// router.put(`/workouts/":id`);
+router.put(`/workouts/:id`, (req, res) => {
+    console.log(req.body);
+    Workout.findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: { exercises: req.body } }
+    )
+        .then((workoutTransaction) => {
+            res.json(workoutTransaction);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
 
-// router.get(`/workouts/range`);
+router.get(`/workouts/range`),
+    (req, res) => {
+        Workout.find({});
+    };
 
-module.exports = router
+module.exports = router;

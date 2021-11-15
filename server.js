@@ -11,7 +11,7 @@ app.use(express.static("public")); //serving public files
 
 app.use(morgan("dev")); //to display morgan logs
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout_db", {
     useNewUrlParser: true,
     useFindAndModify: false,
 });
