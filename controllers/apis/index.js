@@ -45,12 +45,13 @@ router.get(`/workouts/range`, (req, res) => {
     Workout.aggregate([
         {
             $addFields: {
-                totalWeight: { $sum: "$exercises.weight" },
+                // totalWeight: { $sum: "$exercises.weight" },
                 totalDuration: { $sum: "$exercises.duration" },
             },
         },
     ])
         .then((workout) => {
+            console.log(workout)
             const sevenRecent = [];
             i = 0;
             while (i < 7) {
