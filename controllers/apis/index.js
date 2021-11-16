@@ -51,12 +51,14 @@ router.get(`/workouts/range`, (req, res) => {
         },
     ])
         .then((workout) => {
-            console.log(workout)
+            console.log(workout);
             const sevenRecent = [];
             i = 0;
             while (i < 7) {
-                let workoutDay = workout.pop();
-                sevenRecent.push(workoutDay);
+                if (workout) {
+                    let workoutDay = workout.pop();
+                    sevenRecent.push(workoutDay);
+                }
                 i++;
             }
             res.json(sevenRecent);
